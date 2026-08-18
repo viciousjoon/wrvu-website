@@ -378,6 +378,9 @@
   .eps-rules .ok b { color: #2d5a6e; }
   .eps-rules .no b { color: var(--accent); }
   @media (max-width: 700px) { .eps-cols { grid-template-columns: 1fr; gap: 22px; } }
+  .mini-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 32px 0 14px; }
+  .eps-table td .eps-tag { margin-bottom: 0; }
+  .eps-table td { vertical-align: middle; }
 
   .insights {
     margin-top: 80px;
@@ -562,7 +565,7 @@
   </header>
 
   <div class="source-note">
-    <strong>Sources &amp; caveats.</strong> EP procedural codes (93xxx, 33340) verified against 2026 PFS via project documents. <strong>Implant, lead extraction, monitoring, and E/M codes</strong> reflect most-recent published values (2024–2025 baseline) and may shift slightly in 2026 — verify against your fee schedule before compensation modeling. wRVU = work RVU only; total RVU = work + practice expense + malpractice.
+    <strong>Sources &amp; caveats.</strong> EP procedural codes (93xxx, 33340) verified against 2026 PFS via project documents. <strong>Implant, lead extraction, monitoring, and E/M codes</strong> reflect most-recent published values (2024–2025 baseline) and may shift slightly in 2026 — verify against your fee schedule before compensation modeling. wRVU = work RVU only; total RVU = work + practice expense + malpractice. <strong>Notation:</strong> a slash (e.g. 93288/89, 33216/17) lists adjacent related codes with the shared prefix abbreviated; an en-dash (93600–03) is a continuous code range.
   </div>
 
   <nav class="toc">
@@ -609,6 +612,19 @@
       </tbody>
     </table>
 
+    <div class="mini-head">Base · Bundled · Add-on — the 936xx codes classified</div>
+    <table class="eps-table">
+      <thead><tr><th>CPT</th><th>Type</th><th>What it is</th><th class="num">wRVU</th></tr></thead>
+      <tbody>
+        <tr><td class="cpt">93618</td><td><span class="eps-tag bundled">Bundled</span></td><td class="proc">Induction of arrhythmia — included inside 93620</td><td class="num">3.90</td></tr>
+        <tr><td class="cpt">93619</td><td><span class="eps-tag base">Base · pick one</span></td><td class="proc">Comprehensive study, <em>no</em> induction</td><td class="num">6.88</td></tr>
+        <tr class="headline"><td class="cpt">93620</td><td><span class="eps-tag base">Base · pick one</span></td><td class="proc">Comprehensive study <em>with</em> induction (= 93619 + induction)</td><td class="num">11.04</td></tr>
+        <tr><td class="cpt addon">93621</td><td><span class="eps-tag addon">Add-on</span></td><td class="proc">LA pacing/recording — report with 93620</td><td class="num">1.46</td></tr>
+        <tr><td class="cpt addon">93622</td><td><span class="eps-tag addon">Add-on</span></td><td class="proc">LV pacing/recording — report with 93620</td><td class="num">3.02</td></tr>
+        <tr><td class="cpt addon">93623</td><td><span class="eps-tag addon">Add-on</span></td><td class="proc">Programmed stim after IV drug — with 93619/93620</td><td class="num">0.96</td></tr>
+      </tbody>
+    </table>
+
     <div class="eps-logic">
       <h4>How the 936xx study codes combine</h4>
       <div class="eps-sub">One base study, its bundled components, and the add-ons that stack on top — pick one from column 1, never bill column 2 separately, add column 3 as performed.</div>
@@ -644,7 +660,7 @@
         <span class="no"><b>✕</b> 93620 + 93618 &nbsp;(bundled)</span>
         <span class="no"><b>✕</b> 93621 alone &nbsp;(add-on needs a base)</span>
       </div>
-      <div class="eps-sub" style="margin-top:16px;margin-bottom:0;">Note: on an ablation day (93653/54/56), the whole diagnostic study is bundled into the ablation package — don't bill 93619/93620 separately.</div>
+      <div class="eps-sub" style="margin-top:16px;margin-bottom:0;">Note: on an <strong>ablation day</strong> (93653/54/56) the ablation code becomes the base — the whole diagnostic study <em>and</em> its LA-recording add-on (93621) fold into it, so don't bill 93619 / 93620 / 93621. The other add-ons re-map per ablation code (see §13): <strong>93622</strong> is bundled into VT but separately billable with SVT/AFib; <strong>93623</strong> stays separate. (Atrial flutter and SVT are the same code — 93653 — with identical bundling.)</div>
     </div>
   </section>
 
@@ -728,6 +744,19 @@
         <tr><td class="cpt">33286</td><td class="proc">ILR removal</td><td class="num">1.04</td></tr>
       </tbody>
     </table>
+
+    <div class="mini-head">CRT coding — new implant vs. upgrade vs. generator change</div>
+    <table class="eps-table combo-table">
+      <thead><tr><th>Scenario</th><th>Codes</th><th class="num">wRVU</th></tr></thead>
+      <tbody>
+        <tr><td class="proc"><strong>CRT-P</strong> — new (biventricular pacemaker)</td><td class="codes">33208 + 33225</td><td class="num">~15.91</td></tr>
+        <tr class="headline"><td class="proc"><strong>CRT-D</strong> — new (biventricular ICD)</td><td class="codes">33249 + 33225 + 93641-26 (DFT)</td><td class="num">~26.95</td></tr>
+        <tr><td class="proc">Upgrade existing PPM/ICD → CRT (LV lead, separate session)</td><td class="codes">33224</td><td class="num">7.42</td></tr>
+        <tr><td class="proc">CRT-P generator change</td><td class="codes">33229</td><td class="num">7.31</td></tr>
+        <tr><td class="proc">CRT-D generator change</td><td class="codes">33264</td><td class="num">7.79</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:13.5px;color:var(--ink-muted);font-style:italic;margin-top:12px;line-height:1.5;">The lever is the LV (coronary sinus) lead: <strong>+33225</strong> when placed at the <em>same</em> session as the generator; <strong>33224</strong> instead when added at a <em>separate</em> session to upgrade an existing device (includes pocket/generator revision). CRT-P has no defibrillator, so no DFT (93640/41); CRT-D adds it. Generator-only swaps use 33229 (CRT-P) / 33264 (CRT-D).</div>
   </section>
 
   <section id="extraction">
