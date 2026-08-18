@@ -353,6 +353,32 @@
     color: var(--accent); font-weight: 500;
   }
 
+  /* EP study code logic */
+  .eps-logic { border: 1px solid var(--rule); background: var(--paper-2); padding: 22px 24px; margin-top: 24px; }
+  .eps-logic > h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+  }
+  .eps-logic > .eps-sub { font-size: 13.5px; color: var(--ink-muted); font-style: italic; margin-bottom: 18px; }
+  .eps-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .eps-tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600;
+    padding: 4px 9px; border-radius: 4px; margin-bottom: 11px;
+  }
+  .eps-tag.base { background: rgba(184,68,44,0.14); color: var(--accent); }
+  .eps-tag.bundled { background: rgba(14,42,56,0.10); color: var(--ink-muted); }
+  .eps-tag.addon { background: rgba(45,90,110,0.18); color: #2d5a6e; }
+  .eps-cat ul { list-style: none; display: grid; gap: 8px; }
+  .eps-cat li { font-size: 13.5px; line-height: 1.4; color: var(--ink); }
+  .eps-cat li b { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-weight: 600; font-size: 13px; }
+  .eps-cat li span { color: var(--ink-muted); }
+  .eps-rules { display: flex; flex-wrap: wrap; gap: 9px 20px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rule); }
+  .eps-rules span { font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--ink); }
+  .eps-rules .ok b { color: #2d5a6e; }
+  .eps-rules .no b { color: var(--accent); }
+  @media (max-width: 700px) { .eps-cols { grid-template-columns: 1fr; gap: 22px; } }
+
   .insights {
     margin-top: 80px;
     padding: 40px 44px;
@@ -511,7 +537,7 @@
     .insight-list li { color: var(--ink); }
     .insight-list li strong { color: var(--ink); }
     section { page-break-inside: avoid; }
-    .bundle-card, .rules-card { page-break-inside: avoid; }
+    .bundle-card, .rules-card, .eps-logic { page-break-inside: avoid; }
     .bundle-card.key .bc-head { background: var(--paper-2); }
     .bundle-card.key .bc-head .bc-name { color: var(--ink); }
     .bundle-card.key .bc-head .bc-rvu strong { color: var(--ink); }
@@ -582,6 +608,44 @@
         <tr><td class="cpt">93618-26</td><td class="proc">Induction of arrhythmia</td><td class="num">3.90</td><td class="num">6.33</td></tr>
       </tbody>
     </table>
+
+    <div class="eps-logic">
+      <h4>How the 936xx study codes combine</h4>
+      <div class="eps-sub">One base study, its bundled components, and the add-ons that stack on top — pick one from column 1, never bill column 2 separately, add column 3 as performed.</div>
+      <div class="eps-cols">
+        <div class="eps-cat">
+          <span class="eps-tag base">Base · pick ONE</span>
+          <ul>
+            <li><b>93619</b> — comprehensive study, <span>no induction</span></li>
+            <li><b>93620</b> — comprehensive study, <span>with induction (= 93619 + induction)</span></li>
+          </ul>
+        </div>
+        <div class="eps-cat">
+          <span class="eps-tag bundled">Bundled · already inside</span>
+          <ul>
+            <li><b>93600</b> <span>His recording</span></li>
+            <li><b>93602/03</b> <span>RA / RV recording</span></li>
+            <li><b>93610/12</b> <span>atrial / vent. pacing</span></li>
+            <li><b>93618</b> <span>induction (inside 93620)</span></li>
+          </ul>
+        </div>
+        <div class="eps-cat">
+          <span class="eps-tag addon">Add-on · stack on top</span>
+          <ul>
+            <li><b>+93621</b> <span>LA pacing/recording (with 93620)</span></li>
+            <li><b>+93622</b> <span>LV pacing/recording (with 93620)</span></li>
+            <li><b>+93623</b> <span>post-IV-drug stim (with 93619/93620)</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="eps-rules">
+        <span class="ok"><b>✓</b> 93620 + 93621 + 93623</span>
+        <span class="no"><b>✕</b> 93619 + 93620 &nbsp;(pick one)</span>
+        <span class="no"><b>✕</b> 93620 + 93618 &nbsp;(bundled)</span>
+        <span class="no"><b>✕</b> 93621 alone &nbsp;(add-on needs a base)</span>
+      </div>
+      <div class="eps-sub" style="margin-top:16px;margin-bottom:0;">Note: on an ablation day (93653/54/56), the whole diagnostic study is bundled into the ablation package — don't bill 93619/93620 separately.</div>
+    </div>
   </section>
 
   <section id="ablation">
